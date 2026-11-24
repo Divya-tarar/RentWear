@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Bookings | RentWear</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .booking-container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .booking-container h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .booking-subtitle {
+            text-align: center;
+            margin-bottom: 35px;
+            color: #777;
+        }
+
+        .booking-card {
+            display: flex;
+            gap: 25px;
+            background: #fff;
+            padding: 22px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .booking-card img {
+            width: 190px;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .booking-info {
+            flex: 1;
+        }
+
+        .booking-info h2 {
+            margin-top: 5px;
+            color: #762F3B;
+        }
+
+        .booking-info p {
+            margin: 10px 0;
+        }
+
+        .booking-status {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 20px;
+            background: #f9e8da;
+            color: #762F3B;
+            text-transform: capitalize;
+        }
+
+        .empty-bookings {
+            text-align: center;
+            padding: 60px 20px;
+            background: #fff;
+            border-radius: 12px;
+        }
+
+        .empty-bookings a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #762F3B;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        @media(max-width: 600px) {
+            .booking-card {
+                flex-direction: column;
+            }
+
+            .booking-card img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="logo">RentWear</a>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="/products">Explore Collection</a>
+            <a href="/my-bookings">My Bookings</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="booking-container">
+
+        <h1>My Bookings</h1>
+
+        <p class="booking-subtitle">
+            Keep track of all your rented outfits in one place.
+        </p>
+
+        {% if bookings %}
+
+            {% for booking in bookings %}
+
+                <div class="booking-card">
+
+                    <img
+                        src="{{ url_for('static', filename=booking.image_url) }}"
+                        alt="{{ booking.product_name }}"
+                    >
+
+                    <div class="booking-info">
+
+                        <h2>{{ booking.product_name }}</h2>
+
+                        <p>
+                            <strong>Booking ID:</strong>
+                            #{{ booking.booking_id }}
+                        </p>
+
+                        <p>
+                            <strong>Start Date:</strong>
+                            {{ booking.start_date }}
+                        </p>
+
+                        <p>
+                            <strong>End Date:</strong>
+                            {{ booking.end_date }}
+                        </p>
+
+                        <p>
+                            <strong>Total Amount:</strong>
+                            ₹{{ booking.total_amount }}
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            <span class="booking-status">
+                                {{ booking.booking_status }}
+                            </span>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-bookings">
+
+                <h2>No Bookings Yet!</h2>
+
+                <p>
+                    You haven't booked any outfits yet.
+                    Explore our collection and find your perfect look.
+                </p>
+
+                <a href="/products">Explore Collection</a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

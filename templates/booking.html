@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Your Outfit | RentWear</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #FFFAF5;
+            color: #392923;
+        }
+
+        .navbar {
+            background: white;
+            padding: 17px 5%;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            font-weight: 700;
+            color: #392923;
+            text-decoration: none;
+        }
+
+        .brand span {
+            color: #B58A52;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: #762F3B;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 55px auto;
+            padding: 0 20px;
+        }
+
+        .page-heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .page-heading span {
+            color: #B58A52;
+            letter-spacing: 3px;
+            font-size: 12px;
+        }
+
+        .page-heading h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            color: #762F3B;
+            margin: 10px 0;
+        }
+
+        .booking-card {
+            background: white;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 35px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 390px;
+            object-fit: cover;
+            border-radius: 9px;
+        }
+
+        .product-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            color: #762F3B;
+            margin-bottom: 12px;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: #77645A;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #762F3B;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 18px 0;
+        }
+
+        .booking-form {
+            margin-top: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #E5D5CA;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #762F3B;
+        }
+
+        .error-message {
+            background: #FCE8E8;
+            color: #A52A2A;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .summary {
+            background: #F9E8DA;
+            padding: 16px;
+            border-radius: 7px;
+            margin: 20px 0;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #762F3B;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #59232D;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            color: #762F3B;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        footer {
+            background: #392923;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 13px;
+            margin-top: 70px;
+        }
+
+        @media(max-width: 750px) {
+            .booking-card {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image img {
+                height: 300px;
+            }
+
+            .page-heading h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="/" class="brand">
+                RentWear <span>RENT • WEAR • REPEAT</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="/">Home</a>
+                <a href="/products">Collections</a>
+                <a href="/my-bookings">My Bookings</a>
+                <a href="/logout">Logout</a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- BOOKING SECTION -->
+
+    <main class="container">
+
+        <div class="page-heading">
+
+            <span>RESERVE YOUR FAVOURITE STYLE</span>
+
+            <h1>Book Your Outfit</h1>
+
+            <p>Select your rental dates to continue.</p>
+
+        </div>
+
+
+        <div class="booking-card">
+
+            <!-- PRODUCT INFORMATION -->
+
+            <div class="product-image">
+
+                <img
+                    src="{{ url_for('static', filename=product.image_url) }}"
+                    alt="{{ product.product_name }}"
+                >
+
+            </div>
+
+
+            <div class="product-info">
+
+                <h2>{{ product.product_name }}</h2>
+
+                <p>Size: {{ product.size }}</p>
+
+                <p>Colour: {{ product.color }}</p>
+
+                <p>Security Deposit: ₹{{ product.security_deposit }}</p>
+
+                <div class="price">
+                    ₹{{ product.rental_price }} / day
+                </div>
+
+
+                <!-- ERROR MESSAGE -->
+
+                {% if error %}
+                    <div class="error-message">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+
+                <!-- BOOKING FORM -->
+
+                <form method="POST" class="booking-form">
+
+                    <div class="form-group">
+
+                        <label for="start_date">
+                            Rental Start Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="start_date"
+                            name="start_date"
+                            min="{{ today }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="end_date">
+                            Rental End Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="end_date"
+                            name="end_date"
+                            min="{{ today }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="summary">
+
+                        <strong>Booking Information</strong>
+
+                        <p>
+                            Rental price: ₹{{ product.rental_price }} per day
+                        </p>
+
+                        <p>
+                            The total rental amount will be calculated
+                            using your selected dates.
+                        </p>
+
+                        <p>
+                            Security deposit is displayed separately
+                            and is not included in the current booking total.
+                        </p>
+
+                    </div>
+
+
+                    <button type="submit" class="submit-btn">
+                        Confirm Booking
+                    </button>
+
+                </form>
+
+
+                <a
+                    href="{{ url_for('product_details', product_id=product.product_id) }}"
+                    class="back-link"
+                >
+                    ← Back to Product Details
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+        © 2026 RentWear. All Rights Reserved.
+        <br><br>
+        Rent • Wear • Repeat.
+    </footer>
+
+
+    <script>
+
+        const startDate = document.getElementById("start_date");
+        const endDate = document.getElementById("end_date");
+
+        startDate.addEventListener("change", function () {
+
+            endDate.min = startDate.value;
+
+            if (endDate.value && endDate.value < startDate.value) {
+                endDate.value = startDate.value;
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

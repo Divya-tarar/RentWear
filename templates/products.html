@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore Collection | RentWear</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #FFFAF5;
+            color: #392923;
+        }
+
+        .navbar {
+            background: white;
+            padding: 17px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            font-weight: 700;
+            color: #392923;
+            text-decoration: none;
+        }
+
+        .brand span {
+            color: #B58A52;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 9px 12px;
+            color: #392923;
+            border-radius: 6px;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: #F9E8DA;
+            color: #762F3B;
+        }
+
+        .login-btn {
+            border: 1px solid #762F3B;
+            color: #762F3B;
+        }
+
+        .signup-btn,
+        .admin-btn {
+            background: #762F3B;
+            color: white;
+        }
+
+        .page-header {
+            background: linear-gradient(120deg, #F9E8DA, #FFF5EB);
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .page-header span {
+            color: #B58A52;
+            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 43px;
+            color: #762F3B;
+            margin: 12px 0;
+        }
+
+        .page-header p {
+            color: #66534B;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 50px auto;
+            padding: 0 25px;
+        }
+
+        .filter-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .filter-section form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-section input,
+        .filter-section select {
+            padding: 12px 15px;
+            border: 1px solid #E5D5CA;
+            border-radius: 6px;
+            background: white;
+            font-family: inherit;
+            min-width: 190px;
+        }
+
+        .filter-btn {
+            background: #762F3B;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .filter-btn:hover {
+            background: #59232D;
+        }
+
+        .clear-btn {
+            padding: 12px 18px;
+            color: #762F3B;
+            border: 1px solid #762F3B;
+            border-radius: 6px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 270px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            color: #762F3B;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .product-info p {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 9px;
+        }
+
+        .price {
+            font-size: 17px;
+            font-weight: 600;
+            color: #392923;
+            margin: 15px 0;
+        }
+
+        .view-btn {
+            display: block;
+            text-align: center;
+            background: #762F3B;
+            color: white;
+            padding: 11px;
+            border-radius: 6px;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .view-btn:hover {
+            background: #59232D;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 10px;
+            color: #777;
+        }
+
+        footer {
+            margin-top: 70px;
+            padding: 30px;
+            background: #392923;
+            color: white;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        @media(max-width: 1000px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 600px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .filter-section form {
+                width: 100%;
+            }
+
+            .filter-section input,
+            .filter-section select {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="/" class="brand">
+                RentWear <span>RENT • WEAR • REPEAT</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="/" class="nav-btn">Home</a>
+
+                <a href="/products" class="nav-btn">Collections</a>
+
+                <a href="/#how-it-works" class="nav-btn">How It Works</a>
+
+                <a href="/#about" class="nav-btn">About</a>
+
+                {% if session.get('user_id') %}
+
+                    <a href="/my-bookings" class="nav-btn">My Bookings</a>
+
+                    {% if session.get('role') == 'admin' %}
+                        <a href="/admin/dashboard" class="nav-btn admin-btn">Admin Dashboard</a>
+                    {% endif %}
+
+                    <a href="/logout" class="nav-btn login-btn">Logout</a>
+
+                {% else %}
+
+                    <a href="/login" class="nav-btn login-btn">Login</a>
+                    <a href="/register" class="nav-btn signup-btn">Sign Up</a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <span>FASHION FOR EVERY OCCASION</span>
+
+        <h1>Explore Our Collection</h1>
+
+        <p>
+            Find your perfect outfit and rent your favourite style.
+        </p>
+
+    </section>
+
+
+    <!-- PRODUCTS -->
+
+    <main class="container">
+
+        <!-- SEARCH AND FILTER -->
+
+        <div class="filter-section">
+
+            <form method="GET" action="{{ url_for('products_page') }}">
+
+                <input
+                    type="text"
+                    name="q"
+                    placeholder="Search outfits..."
+                    value="{{ search }}"
+                >
+
+                <select name="category">
+
+                    <option value="">All Categories</option>
+
+                    {% for category in categories %}
+
+                        <option
+                            value="{{ category.category_id }}"
+                            {% if selected_category|string == category.category_id|string %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ category.category_name }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <button type="submit" class="filter-btn">
+                    Search
+                </button>
+
+                <a href="/products" class="clear-btn">
+                    Clear
+                </a>
+
+            </form>
+
+        </div>
+
+
+        <!-- PRODUCT GRID -->
+
+        <div class="product-grid">
+
+            {% for product in products %}
+
+                <div class="product-card">
+
+                    <img
+                        src="{{ url_for('static', filename=product.image_url) }}"
+                        alt="{{ product.product_name }}"
+                    >
+
+                    <div class="product-info">
+
+                        <h3>{{ product.product_name }}</h3>
+
+                        <p>
+                            Category: {{ product.category_name }}
+                        </p>
+
+                        <p>
+                            Size: {{ product.size }}
+                        </p>
+
+                        <p>
+                            Color: {{ product.color }}
+                        </p>
+
+                        <div class="price">
+                            ₹{{ product.rental_price }} / day
+                        </div>
+
+                        <a
+                            href="{{ url_for('product_details', product_id=product.product_id) }}"
+                            class="view-btn"
+                        >
+                            View Details
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-message">
+                    <h2>No Outfits Found</h2>
+                    <p>
+                        Try another search or category.
+                    </p>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        © 2026 RentWear. All Rights Reserved.
+        <br><br>
+        Rent • Wear • Repeat.
+    </footer>
+
+</body>
+</html>

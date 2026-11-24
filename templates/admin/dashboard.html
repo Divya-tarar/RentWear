@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | RentWear</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .admin-header {
+            margin-bottom: 35px;
+        }
+
+        .admin-header h1 {
+            color: #762F3B;
+            font-size: 32px;
+        }
+
+        .admin-header p {
+            color: #777;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: #fff;
+            padding: 28px 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+            border-left: 5px solid #762F3B;
+        }
+
+        .stat-card h3 {
+            color: #777;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .stat-card h2 {
+            color: #762F3B;
+            font-size: 34px;
+            margin-top: 12px;
+        }
+
+        .admin-actions h2 {
+            color: #392923;
+            margin-bottom: 20px;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .action-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #392923;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+            transition: 0.3s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .action-card h3 {
+            color: #762F3B;
+            margin-bottom: 10px;
+        }
+
+        .action-card p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        @media(max-width: 800px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 450px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="logo">RentWear</a>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="/products">Collection</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+
+        <div class="admin-header">
+            <h1>Welcome, {{ session.get('user_name') }}!</h1>
+            <p>Manage your RentWear marketplace from one place.</p>
+        </div>
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <h3>Total Users</h3>
+                <h2>{{ total_users }}</h2>
+            </div>
+
+            <div class="stat-card">
+                <h3>Total Products</h3>
+                <h2>{{ total_products }}</h2>
+            </div>
+
+            <div class="stat-card">
+                <h3>Total Bookings</h3>
+                <h2>{{ total_bookings }}</h2>
+            </div>
+
+            <div class="stat-card">
+                <h3>Pending Bookings</h3>
+                <h2>{{ pending_bookings }}</h2>
+            </div>
+
+        </section>
+
+        <section class="admin-actions">
+
+            <h2>Quick Actions</h2>
+
+            <div class="action-grid">
+
+                <a href="/admin/products" class="action-card">
+                    <h3>Manage Products</h3>
+                    <p>Add, edit and remove outfits from your collection.</p>
+                </a>
+
+                <a href="/admin/bookings" class="action-card">
+                    <h3>Manage Bookings</h3>
+                    <p>View customer bookings and manage their status.</p>
+                </a>
+
+                <a href="/products" class="action-card">
+                    <h3>View Store</h3>
+                    <p>Visit your customer-facing RentWear marketplace.</p>
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

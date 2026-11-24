@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Activity | RentWear</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .activity-wrap {
+            max-width: 950px;
+            margin: 55px auto;
+            padding: 0 20px;
+        }
+
+        .activity-card {
+            background: white;
+            padding: 22px 25px;
+            margin: 18px 0;
+            border-radius: 14px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+        }
+
+        .activity-type {
+            color: #762f3b;
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: capitalize;
+        }
+
+        .activity-time {
+            color: #777;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .activity-details {
+            margin-top: 12px;
+            line-height: 1.8;
+        }
+
+        .empty-state {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header style="background:#fff;padding:20px 5%;
+                   display:flex;justify-content:space-between;
+                   align-items:center;">
+
+        <h2 style="margin:0;color:#392923;">RentWear</h2>
+
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a> |
+            <a href="{{ url_for('products_page') }}">Collections</a> |
+            <a href="{{ url_for('my_bookings') }}">My Bookings</a> |
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+
+    </header>
+
+    <main class="activity-wrap">
+
+        <h1>My Activity</h1>
+
+        <p>Your recent RentWear activities stored in MongoDB.</p>
+
+        {% if activities %}
+
+            {% for item in activities %}
+
+                <section class="activity-card">
+
+                    <div class="activity-type">
+                        {{ item.activity_type.replace('_', ' ') }}
+                    </div>
+
+                    <div class="activity-time">
+                        {{ item.timestamp or 'Time unavailable' }}
+                    </div>
+
+                    {% if item.details %}
+
+                        <div class="activity-details">
+
+                            {% for key, value in item.details.items() %}
+
+                                <div>
+                                    <strong>
+                                        {{ key.replace('_', ' ')|title }}:
+                                    </strong>
+
+                                    {{ value }}
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+                </section>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-state">
+
+                <h3>No activity recorded yet</h3>
+
+                <p>
+                    Browse products, search collections or make a booking.
+                    Your activities will appear here.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login | RentWear</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<section style="max-width:450px; margin:70px auto;
+padding:35px; background:white; border-radius:12px;">
+
+    <h1 style="color:#762F3B;">Welcome Back!</h1>
+
+    <p>Login to your RentWear account.</p>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+
+        <input type="email" name="email"
+        placeholder="Email Address" required>
+
+        <input type="password" name="password"
+        placeholder="Password" required>
+
+        <button type="submit" class="main-btn"
+        style="width:100%; margin-top:20px;">
+            Login
+        </button>
+
+    </form>
+
+    <p style="margin-top:20px;">
+        New to RentWear?
+        <a href="/register">Create Account</a>
+    </p>
+
+</section>
+
+</body>
+</html>

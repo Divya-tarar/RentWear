@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ product.product_name }} | RentWear</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #FFFAF5;
+            color: #392923;
+        }
+
+        .navbar {
+            background: white;
+            padding: 17px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            font-weight: 700;
+            color: #392923;
+            text-decoration: none;
+        }
+
+        .brand span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            color: #B58A52;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 9px 12px;
+            color: #392923;
+            border-radius: 6px;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: #F9E8DA;
+            color: #762F3B;
+        }
+
+        .login-btn {
+            border: 1px solid #762F3B;
+            color: #762F3B;
+        }
+
+        .signup-btn,
+        .admin-btn {
+            background: #762F3B;
+            color: white;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 65px auto;
+            padding: 0 25px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #762F3B;
+            font-size: 14px;
+        }
+
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 55px;
+            align-items: start;
+        }
+
+        .product-image {
+            background: #F9E8DA;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 570px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-details {
+            padding: 15px 0;
+        }
+
+        .category-label {
+            color: #B58A52;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .product-details h1 {
+            font-family: 'Playfair Display', serif;
+            color: #762F3B;
+            font-size: 38px;
+            margin: 15px 0;
+        }
+
+        .description {
+            color: #75635A;
+            font-size: 14px;
+            line-height: 1.9;
+            margin-bottom: 25px;
+        }
+
+        .price-box {
+            background: #F9E8DA;
+            border-radius: 9px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .price {
+            font-size: 27px;
+            font-weight: 600;
+            color: #762F3B;
+        }
+
+        .price-box small {
+            color: #77645A;
+        }
+
+        .details-list {
+            border-top: 1px solid #EADCD3;
+            margin-bottom: 25px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #EADCD3;
+            font-size: 14px;
+        }
+
+        .detail-row span:first-child {
+            color: #777;
+        }
+
+        .detail-row span:last-child {
+            font-weight: 500;
+        }
+
+        .available {
+            color: #27804B;
+        }
+
+        .unavailable {
+            color: #B52E3A;
+        }
+
+        .book-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #762F3B;
+            color: white;
+            text-align: center;
+            border-radius: 7px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .book-btn:hover {
+            background: #59232D;
+        }
+
+        .login-note {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .features {
+            margin-top: 65px;
+            background: #F9E8DA;
+            padding: 35px;
+            border-radius: 10px;
+        }
+
+        .features h2 {
+            font-family: 'Playfair Display', serif;
+            color: #762F3B;
+            margin-bottom: 20px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-grid div {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        footer {
+            margin-top: 80px;
+            padding: 30px;
+            background: #392923;
+            color: white;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        @media(max-width: 800px) {
+            .product-layout {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .product-image img {
+                height: 420px;
+            }
+
+            .product-details h1 {
+                font-size: 30px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="/" class="brand">
+                RentWear <span>RENT • WEAR • REPEAT</span>
+            </a>
+
+            <div class="nav-links">
+
+                <a href="/" class="nav-btn">Home</a>
+                <a href="/products" class="nav-btn">Collections</a>
+
+                {% if session.get('user_id') %}
+
+                    <a href="/my-bookings" class="nav-btn">My Bookings</a>
+
+                    {% if session.get('role') == 'admin' %}
+                        <a href="/admin/dashboard" class="nav-btn admin-btn">Admin Dashboard</a>
+                    {% endif %}
+
+                    <a href="/logout" class="nav-btn login-btn">Logout</a>
+
+                {% else %}
+
+                    <a href="/login" class="nav-btn login-btn">Login</a>
+                    <a href="/register" class="nav-btn signup-btn">Sign Up</a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- PRODUCT DETAILS -->
+
+    <main class="container">
+
+        <a href="/products" class="back-link">
+            ← Back to Collection
+        </a>
+
+        <div class="product-layout">
+
+            <div class="product-image">
+
+                <img
+                    src="{{ url_for('static', filename=product.image_url) }}"
+                    alt="{{ product.product_name }}"
+                >
+
+            </div>
+
+
+            <div class="product-details">
+
+                <span class="category-label">
+                    {{ product.category_name }}
+                </span>
+
+                <h1>{{ product.product_name }}</h1>
+
+
+                {% set name = product.product_name|lower %}
+
+                {% if 'bridal' in name or 'lehenga' in name %}
+
+                    <p class="description">
+                        Make your wedding celebrations memorable with
+                        this elegant statement lehenga, perfect for
+                        weddings and receptions.
+                    </p>
+
+                {% elif 'sherwani' in name %}
+
+                    <p class="description">
+                        Make a sophisticated statement at weddings
+                        and grand celebrations with this elegant
+                        sherwani.
+                    </p>
+
+                {% elif 'saree' in name %}
+
+                    <p class="description">
+                        Celebrate traditions in style with this
+                        beautiful saree, ideal for festivals,
+                        family functions and cultural occasions.
+                    </p>
+
+                {% elif 'anarkali' in name %}
+
+                    <p class="description">
+                        Enjoy an elegant traditional look for
+                        festive gatherings, celebrations and
+                        special family occasions.
+                    </p>
+
+                {% elif 'gown' in name or 'party' in name %}
+
+                    <p class="description">
+                        Get party-ready with this stylish outfit,
+                        perfect for evening parties, dinners
+                        and celebrations.
+                    </p>
+
+                {% else %}
+
+                    <p class="description">
+                        Discover a stylish outfit for your next
+                        special event. Find the perfect look
+                        for your occasion.
+                    </p>
+
+                {% endif %}
+
+
+                <div class="price-box">
+
+                    <div class="price">
+                        ₹{{ product.rental_price }}
+                    </div>
+
+                    <small>Rental price per day</small>
+
+                </div>
+
+
+                <div class="details-list">
+
+                    <div class="detail-row">
+                        <span>Category</span>
+                        <span>{{ product.category_name }}</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Size</span>
+                        <span>{{ product.size }}</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Colour</span>
+                        <span>{{ product.color }}</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Security Deposit</span>
+                        <span>₹{{ product.security_deposit }}</span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span>Availability</span>
+
+                        {% if product.availability_status == 'available' %}
+                            <span class="available">Available</span>
+                        {% else %}
+                            <span class="unavailable">Unavailable</span>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                {% if product.availability_status == 'available' %}
+
+                    <a
+                        href="{{ url_for('book_product', product_id=product.product_id) }}"
+                        class="book-btn"
+                    >
+                        Book This Outfit
+                    </a>
+
+                    {% if not session.get('user_id') %}
+                        <p class="login-note">
+                            You will need to log in before making a booking.
+                        </p>
+                    {% endif %}
+
+                {% else %}
+
+                    <button class="book-btn" disabled style="opacity:0.5;">
+                        Currently Unavailable
+                    </button>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- RENTAL INFORMATION -->
+
+        <section class="features">
+
+            <h2>Why Rent With RentWear?</h2>
+
+            <div class="feature-grid">
+
+                <div>
+                    <strong>Affordable Fashion</strong>
+                    <p>Enjoy premium outfits without purchasing them.</p>
+                </div>
+
+                <div>
+                    <strong>Flexible Rental Dates</strong>
+                    <p>Choose the dates that suit your occasion.</p>
+                </div>
+
+                <div>
+                    <strong>Style More, Spend Less</strong>
+                    <p>Explore different outfits for different events.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        © 2026 RentWear. All Rights Reserved.
+        <br><br>
+        Rent • Wear • Repeat.
+    </footer>
+
+</body>
+</html>
