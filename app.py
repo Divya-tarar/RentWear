@@ -18,7 +18,9 @@ load_dotenv()
 # 1. FLASK CONFIGURATION
 # ==========================================================
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_folder="public/static",
+            static_url_path="/static",)
 app.secret_key = os.getenv("SECRET_KEY", "rentwear-development-key-change-before-deployment")
 
 
@@ -683,4 +685,9 @@ def update_booking_status(booking_id):
 # ==========================================================
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=False
+    )
